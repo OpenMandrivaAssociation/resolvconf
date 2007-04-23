@@ -1,6 +1,6 @@
 %define name resolvconf
 %define version 1.37
-%define release %mkrel 4
+%define release %mkrel 5
 
 Summary: Nameserver information handler
 Name: %{name}

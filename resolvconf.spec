@@ -1,6 +1,6 @@
 %define name resolvconf
 %define version 1.37
-%define release %mkrel 6
+%define release %mkrel 7
 
 Summary: Nameserver information handler
 Name: %{name}
@@ -94,6 +94,7 @@ rm -rf %{buildroot}
 %dir %{_sysconfdir}/%{name}/update-libc.d
 %{_mandir}/man?/*
 %dir /var/run/%{name}
+%dir /var/run/%{name}/interface
 %config(noreplace) /var/run/%{name}/resolv.conf
 %config(missingok,noreplace) /var/run/%{name}/enable-updates
 

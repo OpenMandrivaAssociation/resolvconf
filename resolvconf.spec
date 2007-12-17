@@ -17,7 +17,6 @@ Patch2: resolvconf-1.37-metric.patch
 License: GPL
 Group: Networking/Other
 Url: http://packages.debian.org/unstable/net/resolvconf
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
 Conflicts: initscripts < 8.48-3mdv2007.1
 

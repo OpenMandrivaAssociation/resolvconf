@@ -1,12 +1,12 @@
 %define name resolvconf
-%define version 1.37
-%define release %mkrel 8
+%define version 1.38
+%define release %mkrel 1
 
 Summary: Nameserver information handler
 Name: %{name}
 Version: %{version}
 Release: %{release}
-Source0: ftp://ftp.debian.org/debian/pool/main/r/resolvconf/%{name}_%{version}.tar.bz2
+Source0: ftp://ftp.debian.org/debian/pool/main/r/resolvconf/%{name}_%{version}.tar.gz
 Source1: list-by-metric
 Source2: resolvconf.init
 # fix path for run-parts

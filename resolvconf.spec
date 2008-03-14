@@ -4,7 +4,7 @@
 Summary: Nameserver information handler
 Name: %{name}
 Version: %{version}
-Release: %mkrel 3
+Release: %mkrel 4
 Source0: ftp://ftp.debian.org/debian/pool/main/r/resolvconf/%{name}_%{version}.tar.gz
 Source1: list-by-metric
 Source2: resolvconf.init
@@ -13,6 +13,8 @@ Patch0: resolvconf-1.36-path.patch
 # allow /var/run/resolvconf/resolv.conf to be a symlink
 Patch1: resolvconf-1.37-symlink.patch
 Patch2: resolvconf-1.38-metric.patch
+# use same level for eth* ath* wlan* ppp*, to sort them by metric
+Patch3: resolvconf-1.38-mdvorder.patch
 License: GPL
 Group: Networking/Other
 Url: http://packages.debian.org/unstable/net/resolvconf
@@ -35,6 +37,7 @@ programs that use them.
 %patch0 -p1 -b .path
 %patch1 -p1 -b .symlink
 %patch2 -p1 -b .metric
+%patch3 -p1 -b .mdvorder
 
 %build
 

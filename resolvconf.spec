@@ -47,6 +47,7 @@ rm -rf %{buildroot}
 install -d %{buildroot}%{_sysconfdir}
 cp -a etc/%{name} %{buildroot}%{_sysconfdir}
 # remove patch backup files
+rm -f %{buildroot}%{_sysconfdir}/%{name}/interface-order.*
 rm -f %{buildroot}%{_sysconfdir}/%{name}/update.d/*.*
 
 touch %{buildroot}%{_sysconfdir}/%{name}/resolv.conf.d/tail

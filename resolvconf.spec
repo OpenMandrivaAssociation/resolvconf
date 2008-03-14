@@ -12,7 +12,7 @@ Source2: resolvconf.init
 Patch0: resolvconf-1.36-path.patch
 # allow /var/run/resolvconf/resolv.conf to be a symlink
 Patch1: resolvconf-1.37-symlink.patch
-Patch2: resolvconf-1.37-metric.patch
+Patch2: resolvconf-1.38-metric.patch
 License: GPL
 Group: Networking/Other
 Url: http://packages.debian.org/unstable/net/resolvconf

@@ -11,7 +11,7 @@ Source2: resolvconf.init
 # fix path for run-parts
 Patch0: resolvconf-1.36-path.patch
 # allow /var/run/resolvconf/resolv.conf to be a symlink
-Patch1: resolvconf-1.37-symlink.patch
+Patch1: resolvconf-1.41-symlink.patch
 Patch2: resolvconf-1.38-metric.patch
 # use same level for eth* ath* wlan* ppp*, to sort them by metric
 Patch3: resolvconf-1.38-mdvorder.patch

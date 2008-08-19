@@ -4,7 +4,7 @@
 Summary: Nameserver information handler
 Name: %{name}
 Version: %{version}
-Release: %mkrel 1
+Release: %mkrel 2
 Source0: ftp://ftp.debian.org/debian/pool/main/r/resolvconf/%{name}_%{version}.tar.gz
 Source1: list-by-metric
 Source2: resolvconf.init
@@ -21,6 +21,8 @@ Url: http://packages.debian.org/unstable/net/resolvconf
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
 Conflicts: initscripts < 8.48-3mdv2007.1
+Requires(post): rpm-helper
+Requires(preun): rpm-helper
 
 %description
 Resolvconf is a framework for keeping track of the system's

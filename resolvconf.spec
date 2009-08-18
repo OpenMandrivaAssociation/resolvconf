@@ -4,7 +4,7 @@
 Summary: Nameserver information handler
 Name: %{name}
 Version: %{version}
-Release: %mkrel 4
+Release: %mkrel 5
 Source0: ftp://ftp.debian.org/debian/pool/main/r/resolvconf/%{name}_%{version}.tar.gz
 Source1: list-by-metric
 Source2: resolvconf.init
@@ -15,6 +15,9 @@ Patch1: resolvconf-1.41-symlink.patch
 Patch2: resolvconf-1.38-metric.patch
 # use same level for eth* ath* wlan* ppp*, to sort them by metric
 Patch3: resolvconf-1.38-mdvorder.patch
+# (cg) Some fixes related to nscd that have bugged me for a while.
+Patch4: resolvconf-1.41-nscd-cache-enabled-check-fix.patch
+Patch5: resolvconf-1.41-nscd-restart-fix.patch
 License: GPL
 Group: Networking/Other
 Url: http://packages.debian.org/unstable/net/resolvconf
@@ -40,6 +43,8 @@ programs that use them.
 %patch1 -p1 -b .symlink
 %patch2 -p1 -b .metric
 %patch3 -p1 -b .mdvorder
+%patch4 -p1 -b .nscd1
+%patch5 -p1 -b .nscd2
 
 %build
 

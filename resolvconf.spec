@@ -1,5 +1,5 @@
 %define name resolvconf
-%define version 1.41
+%define version 1.45
 
 Summary: Nameserver information handler
 Name: %{name}
@@ -14,7 +14,7 @@ Patch0: resolvconf-1.36-path.patch
 Patch1: resolvconf-1.41-symlink.patch
 Patch2: resolvconf-1.38-metric.patch
 # use same level for eth* ath* wlan* ppp*, to sort them by metric
-Patch3: resolvconf-1.38-mdvorder.patch
+Patch3: resolvconf-1.45-mdvorder.patch
 # (cg) Some fixes related to nscd that have bugged me for a while.
 Patch4: resolvconf-1.41-nscd-cache-enabled-check-fix.patch
 Patch5: resolvconf-1.41-nscd-restart-fix.patch

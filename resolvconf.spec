@@ -4,7 +4,7 @@
 Summary: Nameserver information handler
 Name: %{name}
 Version: %{version}
-Release: %mkrel 1
+Release: %mkrel 2
 Source0: ftp://ftp.debian.org/debian/pool/main/r/resolvconf/%{name}_%{version}.tar.gz
 Source1: list-by-metric
 Source2: resolvconf.init
@@ -84,6 +84,10 @@ cp -a %{_sysconfdir}/resolv.conf %{_sysconfdir}/%{name}/resolv.conf.d/tail
 
 %preun
 %_preun_service %{name}
+
+%triggerpostun -- %{name} < 1.41-4
+# update resolvconf startup script priority
+chkconfig resolvconf reset
 
 %clean
 rm -rf %{buildroot}

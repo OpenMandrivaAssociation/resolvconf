@@ -1,10 +1,10 @@
 %define name resolvconf
-%define version 1.45
+%define version 1.46
 
 Summary: Nameserver information handler
 Name: %{name}
 Version: %{version}
-Release: %mkrel 3
+Release: %mkrel 1
 Source0: ftp://ftp.debian.org/debian/pool/main/r/resolvconf/%{name}_%{version}.tar.gz
 Source1: list-by-metric
 Source2: resolvconf.init
@@ -18,7 +18,7 @@ Patch3: resolvconf-1.45-mdvorder.patch
 # (cg) Some fixes related to nscd that have bugged me for a while.
 Patch4: resolvconf-1.41-nscd-cache-enabled-check-fix.patch
 Patch5: resolvconf-1.41-nscd-restart-fix.patch
-License: GPL
+License: GPLv2+
 Group: Networking/Other
 Url: http://packages.debian.org/unstable/net/resolvconf
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot

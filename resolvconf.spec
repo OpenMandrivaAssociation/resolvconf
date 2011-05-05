@@ -4,7 +4,7 @@
 Summary: Nameserver information handler
 Name: %{name}
 Version: %{version}
-Release: %mkrel 1
+Release: %mkrel 2
 Source0: ftp://ftp.debian.org/debian/pool/main/r/resolvconf/%{name}_%{version}.tar.gz
 Source1: list-by-metric
 Source2: resolvconf.init

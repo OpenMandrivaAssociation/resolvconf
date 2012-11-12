@@ -1,0 +1,13 @@
+diff -ur resolvconf-1.45.orig/etc/resolvconf/interface-order resolvconf-1.45/etc/resolvconf/interface-order
+--- resolvconf-1.45.orig/etc/resolvconf/interface-order	2009-08-13 19:58:50.000000000 +0200
++++ resolvconf-1.45/etc/resolvconf/interface-order	2009-08-19 20:51:16.000000000 +0200
+@@ -6,9 +6,4 @@
+ lo
+ tun*
+ tap*
+-hso*
+-eth*
+-ath*
+-wlan*
+-ppp*
+ *

@@ -1,0 +1,11 @@
+--- resolvconf-1.41/etc/resolvconf/update.d/libc.orig	2009-08-18 18:20:08.000000000 +0100
++++ resolvconf-1.41/etc/resolvconf/update.d/libc	2009-08-18 18:20:29.000000000 +0100
+@@ -149,7 +149,7 @@
+ 	&& [ -x /usr/sbin/nscd ] \
+ 	&& [ -x /etc/init.d/nscd ] \
+ 	&& [ -s /etc/nscd.conf ] \
+-	&& grep -q '[[:space:]]*enable-cache[[:space:]]\+hosts[[:space:]]\+yes' /etc/nscd.conf \
++	&& grep -q '^[[:space:]]*enable-cache[[:space:]]\+hosts[[:space:]]\+yes' /etc/nscd.conf \
+ 	&& start-stop-daemon --stop --quiet --pidfile="$NSCD_PIDFILE" --exec /usr/sbin/nscd --retry=TERM/3/HUP/5 \
+ 	&& start-stop-daemon --stop --quiet --oknodo --exec /usr/sbin/nscd --retry=0/5
+ then

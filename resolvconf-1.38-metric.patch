@@ -1,0 +1,36 @@
+diff -p -up resolvconf-1.38/bin/list-records.metric resolvconf-1.38/bin/list-records
+--- resolvconf-1.38/bin/list-records.metric	2006-08-09 15:36:43.000000000 +0200
++++ resolvconf-1.38/bin/list-records	2008-03-14 22:08:01.000000000 +0100
+@@ -36,10 +36,17 @@ if [ -r /etc/resolvconf/interface-order 
+ 		/^$/d
+ 		' /etc/resolvconf/interface-order)"
+ fi
++INTERFACES=
+ shopt -s nullglob extglob
+-# Pathname expansion occurs on the following line resulting, in general,
++while read P; do
++    EXP=$(echo $P)
++    [ -n "$EXP" ] && INTERFACES="$INTERFACES $(/lib/resolvconf/list-by-metric $EXP)"
++done <<EOF
++$PATTERNS
++EOF
++# Pathname expansion occurs on the previous lines resulting, in general,
+ # in multiple instances of filenames; duplicates must be removed.
+-uniquify $PATTERNS
++uniquify $INTERFACES
+ RCRDS=""
+ for FLNM in $RSLT ; do
+ 	# Only list records of non-zero size
+diff -p -up resolvconf-1.38/man/interface-order.5.metric resolvconf-1.38/man/interface-order.5
+--- resolvconf-1.38/man/interface-order.5.metric	2006-08-09 15:36:43.000000000 +0200
++++ resolvconf-1.38/man/interface-order.5	2008-03-14 22:06:51.000000000 +0100
+@@ -10,6 +10,8 @@ resolvconf nameserver information record
+ are processed
+ by those resolvconf update scripts
+ that consult this file.
++In Mandriva, the expansion of each line is sorted again
++by the metric value of the interfaces.
+ (The name of the file is apt because
+ a resolvconf nameserver information record
+ is named after the interface with which it is associated.)
+diff -p -up resolvconf-1.38/man/resolvconf.8.metric resolvconf-1.38/man/resolvconf.8

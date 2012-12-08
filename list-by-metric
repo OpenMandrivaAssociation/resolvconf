@@ -1,0 +1,31 @@
+#!/bin/sh
+
+list() {
+    local dev=$1
+    if [ -n "$dev" ]; then
+	arg="dev $dev"
+    fi
+    ip route list $arg 2>/dev/null \
+    | awk '$1 == "default" {
+    dev = "'$dev'"
+    metric = "0"
+    for (i = 1; i <= NF; i++) {
+        if ($i == "metric") { metric = $(i+1) }
+        if ($i == "dev") { dev = $(i+1) }
+    }
+    if (dev) { print dev " " metric }
+    }'
+}
+
+list_all() {
+    if [ -z "$*" ]; then
+	list
+    else
+	for intf in $*; do
+	    RES=$(list $intf)
+	    echo ${RES:-$intf 2147483647}
+	done
+    fi
+}
+
+list_all $* | sort -nk 2 | awk '{ print $1 }'

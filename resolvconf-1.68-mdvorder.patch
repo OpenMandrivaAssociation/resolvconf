@@ -1,0 +1,14 @@
+--- b/etc/resolvconf/interface-order	2012-09-10 13:55:45.000000000 +0400
++++ a/etc/resolvconf/interface-order	2012-09-15 12:53:24.995254777 +0400
+@@ -6,11 +6,6 @@
+ lo
+ tun*
+ tap*
+-hso*
+ em+([0-9])?(_+([0-9]))*
+ p+([0-9])p+([0-9])?(_+([0-9]))*
+-eth*
+-ath*
+-wlan*
+-ppp*
+ *

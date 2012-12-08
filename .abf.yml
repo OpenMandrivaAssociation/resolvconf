@@ -1,4 +1,2 @@
 sources:
-  "list-by-metric:"	cd8d78e34124b27efef2895cc5a6fa8d4e4de761
-  "resolvconf_1.46.tar.gz:"	03797c6ce6cf9cc1ca4ed5d493e532f26d849e6a
-  "resolvconf.init:"	7a5bfdacc8f34ed9df506643737a4c86210ff0da
+  "resolvconf_1.68.tar.gz": 65c8ba008746e168f37723d770be583b25fc24df

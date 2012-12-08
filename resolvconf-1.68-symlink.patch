@@ -1,0 +1,12 @@
+--- a/etc/resolvconf/update.d/libc	2012-09-10 13:55:45.000000000 +0400
++++ b/etc/resolvconf/update.d/libc	2012-09-25 22:15:42.000000000 +0400
+@@ -63,7 +63,8 @@
+ if ! resolv_conf_is_symlinked_to_dynamic_file ; then
+ 	case "$REPORT_ABSENT_SYMLINK" in
+ 	  y|Y|yes|YES|Yes)
+-		report_warning "${ETC}/resolv.conf is not a symbolic link to $DYNAMICRSLVCNFFILE"
++		if readlink /run/resolvconf/resolv.conf; then rm -f /run/resolvconf/resolv.conf; fi; touch /etc/resolv.conf; cp -f /etc/resolv.conf /etc/resolv.conf.old; ln -nsf /run/resolvconf/resolv.conf /etc/resolv.conf
++		report_warning "${ETC}/resolv.conf is not a symbolic link to $DYNAMICRSLVCNFFILE . Recreating."
+ 		;;
+ 	esac
+ fi

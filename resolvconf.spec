@@ -1,32 +1,28 @@
-%define name resolvconf
-%define version 1.68
-
-Summary: Nameserver information handler
-Name: %{name}
-Version: %{version}
-Release: 7
-Source0: ftp://ftp.debian.org/debian/pool/main/r/resolvconf/%{name}_%{version}.tar.gz
-Source1: list-by-metric
-Source2: resolvconf.init
-Source3: %{name}-tmpfiles.conf
+Summary:	Nameserver information handler
+Name:		resolvconf
+Version:	1.68
+Release:	8
+Source0:	ftp://ftp.debian.org/debian/pool/main/r/resolvconf/%{name}_%{version}.tar.gz
+Source1:	list-by-metric
+Source2:	resolvconf.init
+Source3:	%{name}-tmpfiles.conf
 # fix path for run-parts
-Patch0: resolvconf-1.68-path.patch
+Patch0:		resolvconf-1.68-path.patch
 # allow /run/resolvconf/resolv.conf to be a symlink
-Patch1: resolvconf-1.68-symlink.patch
-Patch2: resolvconf-1.68-metric.patch
+Patch1:		resolvconf-1.68-symlink.patch
+Patch2:		resolvconf-1.68-metric.patch
 # use same level for eth* ath* wlan* ppp*, to sort them by metric
-Patch3: resolvconf-1.68-mdvorder.patch
+Patch3:		resolvconf-1.68-mdvorder.patch
 # (cg) Some fixes related to nscd that have bugged me for a while.
-Patch4: resolvconf-1.41-nscd-cache-enabled-check-fix.patch
-Patch5: resolvconf-1.41-nscd-restart-fix.patch
-License: GPLv2+
-Group: Networking/Other
-Url: http://packages.debian.org/unstable/net/resolvconf
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildArch: noarch
-Conflicts: initscripts < 8.48-3mdv2007.1
-Requires(post): rpm-helper
-Requires(preun): rpm-helper
+Patch4:		resolvconf-1.41-nscd-cache-enabled-check-fix.patch
+Patch5:		resolvconf-1.41-nscd-restart-fix.patch
+License:	GPLv2+
+Group:		Networking/Other
+Url:		http://packages.debian.org/unstable/net/resolvconf
+BuildArch:	noarch
+Conflicts:	initscripts < 8.48-3mdv2007.1
+Requires(post):	rpm-helper
+Requires(preun):	rpm-helper
 Requires(post):	systemd
 
 %description
@@ -51,7 +47,6 @@ programs that use them.
 %build
 
 %install
-rm -rf %{buildroot}
 
 install -d %{buildroot}%{_sysconfdir}
 cp -a etc/%{name} %{buildroot}%{_sysconfdir}
@@ -87,7 +82,6 @@ systemd-tmpfiles --create %{name}.conf
 %_preun_service %{name}
 
 %files
-%defattr(-,root,root)
 %doc README COPYING
 /sbin/%{name}
 /lib/%{name}

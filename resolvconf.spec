@@ -27,6 +27,7 @@ BuildArch: noarch
 Conflicts: initscripts < 8.48-3mdv2007.1
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
+Requires(post):	systemd
 
 %description
 Resolvconf is a framework for keeping track of the system's

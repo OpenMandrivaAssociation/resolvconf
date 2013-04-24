@@ -1,6 +1,6 @@
 Summary:	Nameserver information handler
 Name:		resolvconf
-Version:	1.69
+Version:	1.71
 Release:	1
 Source0:	ftp://ftp.debian.org/debian/pool/main/r/resolvconf/%{name}_%{version}.tar.gz
 Source1:	list-by-metric

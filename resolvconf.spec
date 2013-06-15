@@ -1,21 +1,17 @@
 Summary:	Nameserver information handler
 Name:		resolvconf
-Version:	1.71
+Version:	1.72
 Release:	1
 Source0:	ftp://ftp.debian.org/debian/pool/main/r/resolvconf/%{name}_%{version}.tar.gz
 Source1:	list-by-metric
 Source2:	resolvconf.init
 Source3:	%{name}-tmpfiles.conf
-# fix path for run-parts
-Patch0:		resolvconf-1.68-path.patch
+
 # allow /run/resolvconf/resolv.conf to be a symlink
 Patch1:		resolvconf-1.68-symlink.patch
 Patch2:		resolvconf-1.68-metric.patch
 # use same level for eth* ath* wlan* ppp*, to sort them by metric
-Patch3:		resolvconf-1.68-mdvorder.patch
-# (cg) Some fixes related to nscd that have bugged me for a while.
-Patch4:		resolvconf-1.41-nscd-cache-enabled-check-fix.patch
-Patch5:		resolvconf-1.41-nscd-restart-fix.patch
+Patch3:		resolvconf-1.72-remove-interface-order.patch
 License:	GPLv2+
 Group:		Networking/Other
 Url:		http://packages.debian.org/unstable/net/resolvconf
@@ -37,14 +33,15 @@ programs that use them.
 
 %prep
 %setup -q
-%patch0 -p1 -b .path
 %patch1 -p1 -b .symlink
 %patch2 -p1 -b .metric
 %patch3 -p1 -b .mdvorder
-%patch4 -p1 -b .nscd1
-%patch5 -p1 -b .nscd2
 
 %build
+# fix path for run-parts
+for i in ./bin/resolvconf ./etc/resolvconf/update.d/libc; do
+sed -i -e 's#PATH=.*#PATH=/sbin:/bin:/usr/bin#' $i;
+done
 
 %install
 
@@ -66,13 +63,20 @@ ln -s /run/%{name} %{buildroot}%{_sysconfdir}/%{name}/run
 install -d %{buildroot}%{_initrddir}
 install -m 755 %{SOURCE2} %{buildroot}%{_initrddir}/%{name}
 
-# create tmpfiles directory
-install -d -m0755 %{buildroot}%{_prefix}/lib/tmpfiles.d
-install -m0644 %{SOURCE3} %{buildroot}%{_prefix}/lib/tmpfiles.d/%{name}.conf
+# install tmpfiles
+install -D -p -m0644 %{SOURCE3} %{buildroot}%{_prefix}/lib/tmpfiles.d/%{name}.conf
 
 install -d %{buildroot}%{_mandir}/man{5,8}
 install -m 644 man/interface-order.5 %{buildroot}%{_mandir}/man5
 install -m 644 man/resolvconf.8 %{buildroot}%{_mandir}/man8
+
+%triggerpostun -- resolvconf == 1.69-1
+# tranform resolv.conf from a symlink back to a file
+    if [ -L /etc/resolv.conf ] && [ "$(readlink /etc/resolv.conf)" = "/run/resolvconf/resolv.conf" ]; then
+    rm -f /etc/resolv.conf
+    mv /run/resolvconf/resolv.conf /etc/resolv.conf
+fi
+
 
 %post
 systemd-tmpfiles --create %{name}.conf

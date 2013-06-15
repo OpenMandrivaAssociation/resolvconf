@@ -1,0 +1,22 @@
+diff -Naur resolvconf-1.72/etc/resolvconf/interface-order resolvconf-1.72.tpg/etc/resolvconf/interface-order
+--- resolvconf-1.72/etc/resolvconf/interface-order	2013-05-08 11:51:13.000000000 +0000
++++ resolvconf-1.72.tpg/etc/resolvconf/interface-order	2013-06-15 12:18:14.009890549 +0000
+@@ -6,18 +6,6 @@
+ lo
+ tun*
+ tap*
+-hso*
+ em+([0-9])?(_+([0-9]))*
+ p+([0-9])p+([0-9])?(_+([0-9]))*
+-eth*([^.]).inet6
+-eth*([^.]).ip6.@(dhclient|dhcpcd|pump|udhcpc)
+-eth*([^.]).inet
+-eth*([^.]).@(dhclient|dhcpcd|pump|udhcpc)
+-eth*
+-@(ath|wifi|wlan)*([^.]).inet6
+-@(ath|wifi|wlan)*([^.]).ip6.@(dhclient|dhcpcd|pump|udhcpc)
+-@(ath|wifi|wlan)*([^.]).inet
+-@(ath|wifi|wlan)*([^.]).@(dhclient|dhcpcd|pump|udhcpc)
+-@(ath|wifi|wlan)*
+-ppp*
+ *

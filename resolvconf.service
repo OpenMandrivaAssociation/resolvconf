@@ -1,0 +1,12 @@
+[Unit]
+Description=resolvconf
+After=syslog.target
+
+[Service]
+Type=forking
+ExecStartPre=/bin/mkdir -p /run/resolvconf/interface ; /bin/touch /run/resolvconf/postponed-update
+ExecStart=/sbin/resolvconf --enable-updates
+ExecStopPost=/sbin/resolvconf --disable-updates
+
+[Install]
+WantedBy=network.target

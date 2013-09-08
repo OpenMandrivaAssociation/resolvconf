@@ -1,10 +1,10 @@
 Summary:	Nameserver information handler
 Name:		resolvconf
 Version:	1.72
-Release:	1
+Release:	2
 Source0:	ftp://ftp.debian.org/debian/pool/main/r/resolvconf/%{name}_%{version}.tar.gz
 Source1:	list-by-metric
-Source2:	resolvconf.init
+Source2:	resolvconf.service
 Source3:	%{name}-tmpfiles.conf
 
 # allow /run/resolvconf/resolv.conf to be a symlink
@@ -60,8 +60,8 @@ install bin/list-records %{buildroot}/lib/%{name}
 install -m 755 %{SOURCE1} %{buildroot}/lib/%{name}/list-by-metric
 ln -s /run/%{name} %{buildroot}%{_sysconfdir}/%{name}/run
 
-install -d %{buildroot}%{_initrddir}
-install -m 755 %{SOURCE2} %{buildroot}%{_initrddir}/%{name}
+install -d %{buildroot}%{_unitdir}
+install -m 755 %{SOURCE2} %{buildroot}%{_unitdir}/%{name}.service
 
 # install tmpfiles
 install -D -p -m0644 %{SOURCE3} %{buildroot}%{_prefix}/lib/tmpfiles.d/%{name}.conf
@@ -79,7 +79,7 @@ fi
 
 
 %post
-systemd-tmpfiles --create %{name}.conf
+%tmpfiles_create %{name}
 %_post_service %{name}
 
 %preun
@@ -90,7 +90,7 @@ systemd-tmpfiles --create %{name}.conf
 /sbin/%{name}
 /lib/%{name}
 %{_prefix}/lib/tmpfiles.d/*.conf
-%{_initrddir}/%{name}
+%{_unitdir}/%{name}.service
 %dir %{_sysconfdir}/%{name}
 %{_sysconfdir}/%{name}/run
 %config(noreplace) %{_sysconfdir}/%{name}/interface-order

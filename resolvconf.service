@@ -3,7 +3,7 @@ Description=resolvconf
 After=syslog.target
 
 [Service]
-Type=forking
+Type=simple
 #ExecStartPre=/bin/mkdir -p /run/resolvconf/interface ; /bin/touch /run/resolvconf/postponed-update
 ExecStart=sleep 1;/sbin/resolvconf --enable-updates
 ExecStopPost=/sbin/resolvconf --disable-updates

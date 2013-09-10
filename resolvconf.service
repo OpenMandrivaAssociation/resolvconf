@@ -5,6 +5,7 @@ After=syslog.target
 [Service]
 Type=simple
 RestartSec=2
+Restart=on-failure
 #ExecStartPre=/bin/mkdir -p /run/resolvconf/interface ; /bin/touch /run/resolvconf/postponed-update
 ExecStart=sleep 1;/sbin/resolvconf --enable-updates
 ExecStopPost=/sbin/resolvconf --disable-updates

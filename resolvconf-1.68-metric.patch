@@ -1,16 +1,17 @@
---- b/bin/list-records	2012-09-10 13:55:45.000000000 +0400
-+++ a/bin/list-records	2012-09-15 12:49:42.189196960 +0400
-@@ -37,14 +37,22 @@
+diff --git a/bin/list-records b/bin/list-records
+index b1a9ef1..07c1b33 100755
+--- a/bin/list-records
++++ b/bin/list-records
+@@ -73,14 +73,22 @@ if [ -r /etc/resolvconf/interface-order ] ; then
  		' /etc/resolvconf/interface-order)"
  fi
  
 +INTERFACES=
  shopt -s nullglob extglob
  # The nullglob option isn't essential since the test -s below will eliminate
- # any unexpanded patterns.  The extglob option makes the glob language of
- # interface-order patterns as powerful as regexps.
+ # any unexpanded patterns. The extglob option, however, is essential; it
+ # makes the glob language of interface-order patterns as powerful as regexps.
  
--# Pathname expansion occurs on the following line resulting, in general,
 +while read P; do
 +    EXP=$(echo $P)
 +    [ -n "$EXP" ] && INTERFACES="$INTERFACES $(/lib/resolvconf/list-by-metric $EXP)"
@@ -18,20 +19,22 @@
 +$PATTERNS
 +EOF
 +
-+# Pathname expansion occurs on the previous lines resulting, in general,
+ # Pathname expansion occurs on the following line resulting, in general,
  # in multiple instances of filenames; duplicates must be removed.
 -uniquify $PATTERNS
 +uniquify $INTERFACES
+ # Result is in RSLT
+ 
  for FLNM in $RSLT ; do
- 	# Only list records of non-zero size
- 	[ -s "$FLNM" ] && echo "$FLNM"
---- b/man/interface-order.5	2012-09-10 13:55:45.000000000 +0400
-+++ a/man/interface-order.5	2012-09-15 12:50:30.137487788 +0400
-@@ -10,6 +10,8 @@
+diff --git a/man/interface-order.5 b/man/interface-order.5
+index b5e176a..87e6b97 100644
+--- a/man/interface-order.5
++++ b/man/interface-order.5
+@@ -10,6 +10,8 @@ resolvconf nameserver information records
  are processed
  by those resolvconf update scripts
  that consult this file.
-+In Mandriva, the expansion of each line is sorted again
++In OpenMandriva, the expansion of each line is sorted again
 +by the metric value of the interfaces.
  (The name of the file is apt because
  a resolvconf nameserver information record

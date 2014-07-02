@@ -72,7 +72,7 @@ install -m 644 man/resolvconf.8 %{buildroot}%{_mandir}/man8
 fi
 
 %files
-%doc README COPYING
+%doc README
 /sbin/%{name}
 /lib/%{name}
 %{_prefix}/lib/tmpfiles.d/*.conf

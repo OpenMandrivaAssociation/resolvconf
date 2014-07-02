@@ -1,7 +1,7 @@
 Summary:	Nameserver information handler
 Name:		resolvconf
 Version:	1.74
-Release:	6
+Release:	7
 License:	GPLv2+
 Group:		Networking/Other
 Url:		http://packages.debian.org/unstable/net/resolvconf
@@ -16,7 +16,6 @@ Patch2:		resolvconf-1.68-metric.patch
 # use same level for eth* ath* wlan* ppp*, to sort them by metric
 Patch3:		resolvconf-1.72-remove-interface-order.patch
 BuildArch:	noarch
-Requires(post,preun):	rpm-helper
 Requires(post):	systemd
 
 %description
@@ -71,13 +70,6 @@ install -m 644 man/resolvconf.8 %{buildroot}%{_mandir}/man8
     rm -f /etc/resolv.conf
     mv /run/resolvconf/resolv.conf /etc/resolv.conf
 fi
-
-%post
-%tmpfiles_create %{name}
-%_post_service %{name}
-
-%preun
-%_preun_service %{name}
 
 %files
 %doc README COPYING

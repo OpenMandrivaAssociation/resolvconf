@@ -1,11 +1,11 @@
 Summary:	Nameserver information handler
 Name:		resolvconf
-Version:	1.74
-Release:	8
+Version:	1.75
+Release:	1
 License:	GPLv2+
 Group:		Networking/Other
 Url:		http://packages.debian.org/unstable/net/resolvconf
-Source0:	ftp://ftp.debian.org/debian/pool/main/r/resolvconf/%{name}_%{version}.tar.gz
+Source0:	ftp://ftp.debian.org/debian/pool/main/r/resolvconf/%{name}_%{version}.tar.xz
 Source1:	list-by-metric
 Source2:	resolvconf.service
 Source3:	%{name}-tmpfiles.conf
@@ -64,6 +64,16 @@ install -d %{buildroot}%{_mandir}/man{5,8}
 install -m 644 man/interface-order.5 %{buildroot}%{_mandir}/man5
 install -m 644 man/resolvconf.8 %{buildroot}%{_mandir}/man8
 
+%post
+%tmpfiles_create %{name}.conf
+%systemd_post %{name}
+
+%preun
+%systemd_preun %{name}
+
+%postun
+%systemd_postun_with_restart %{name}
+
 %triggerpostun -- resolvconf == 1.69-1
 # tranform resolv.conf from a symlink back to a file
     if [ -L /etc/resolv.conf ] && [ "$(readlink /etc/resolv.conf)" = "/run/resolvconf/resolv.conf" ]; then
@@ -86,4 +96,3 @@ fi
 %{_sysconfdir}/%{name}/update.d/*
 #dir %{_sysconfdir}/%{name}/update-libc.d
 %{_mandir}/man?/*
-

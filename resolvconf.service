@@ -1,13 +1,18 @@
 [Unit]
 Description=resolvconf
-After=syslog.target
+After=remote-fs.target local-fs.target syslog.target
+ConditionPathIsDirectory=/run
 
 [Service]
-Type=simple
+Type=forking
 RestartSec=1
 Restart=on-success
+RemainAfterExit=yes
+ExecStartPre=/bin/mkdir -p /run/resolvconf/interface
+ExecStartPre=/bin/touch /run/resolvconf/interface/enable-updates
+ExecStartPre=/bin/touch /run/resolvconf/enable-updates
 ExecStart=/sbin/resolvconf --enable-updates
 ExecStopPost=/sbin/resolvconf --disable-updates
 
 [Install]
-WantedBy=network.target
+WantedBy=sysinit.target

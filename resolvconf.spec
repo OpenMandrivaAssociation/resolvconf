@@ -1,7 +1,7 @@
 Summary:	Nameserver information handler
 Name:		resolvconf
 Version:	1.75
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Networking/Other
 Url:		http://packages.debian.org/unstable/net/resolvconf
@@ -55,7 +55,7 @@ install -m 755 %{SOURCE1} %{buildroot}/lib/%{name}/list-by-metric
 ln -s /run/%{name} %{buildroot}%{_sysconfdir}/%{name}/run
 
 install -d %{buildroot}%{_unitdir}
-install -m 755 %{SOURCE2} %{buildroot}%{_unitdir}/%{name}.service
+install -m 644 %{SOURCE2} %{buildroot}%{_unitdir}/%{name}.service
 
 # install tmpfiles
 install -D -p -m0644 %{SOURCE3} %{buildroot}%{_prefix}/lib/tmpfiles.d/%{name}.conf

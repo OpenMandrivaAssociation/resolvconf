@@ -1,7 +1,7 @@
 Summary:	Nameserver information handler
 Name:		resolvconf
 Version:	1.75
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		Networking/Other
 Url:		http://packages.debian.org/unstable/net/resolvconf
@@ -17,6 +17,9 @@ Patch2:		resolvconf-1.68-metric.patch
 Patch3:		resolvconf-1.72-remove-interface-order.patch
 BuildArch:	noarch
 Requires(post):	systemd
+
+# requires run-parts
+Requires:	run-parts
 
 %description
 Resolvconf is a framework for keeping track of the system's

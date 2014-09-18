@@ -1,18 +1,15 @@
 [Unit]
-Description=resolvconf
-After=remote-fs.target local-fs.target syslog.target
-ConditionPathIsDirectory=/run
+Description=Nameserver information manager
+Documentation=man:resolvconf(8)
+DefaultDependencies=no
+Before=networking.service
 
 [Service]
-Type=forking
-RestartSec=1
-Restart=on-success
 RemainAfterExit=yes
 ExecStartPre=/bin/mkdir -p /run/resolvconf/interface
-ExecStartPre=/bin/touch /run/resolvconf/interface/enable-updates
-ExecStartPre=/bin/touch /run/resolvconf/enable-updates
+ExecStartPre=/bin/touch /run/resolvconf/postponed-update
 ExecStart=/sbin/resolvconf --enable-updates
-ExecStopPost=/sbin/resolvconf --disable-updates
+ExecStop=/sbin/resolvconf --disable-updates
 
 [Install]
 WantedBy=sysinit.target

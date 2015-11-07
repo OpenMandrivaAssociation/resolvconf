@@ -2,6 +2,7 @@
 Description=Nameserver information manager
 Documentation=man:resolvconf(8)
 DefaultDependencies=no
+After=local-fs.target
 Before=networking.service
 
 [Service]

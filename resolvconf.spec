@@ -1,7 +1,7 @@
 Summary:	Nameserver information handler
 Name:		resolvconf
 Version:	1.75
-Release:	2.1
+Release:	2.2
 License:	GPLv2+
 Group:		Networking/Other
 Url:		http://packages.debian.org/unstable/net/resolvconf

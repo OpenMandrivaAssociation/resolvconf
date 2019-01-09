@@ -1,7 +1,7 @@
 Summary:	Nameserver information handler
 Name:		resolvconf
 Version:	1.75
-Release:	DEAD PACKAGE GOT REPLACED BY SYSTEMD
+Release:	5
 License:	GPLv2+
 Group:		Networking/Other
 Url:		http://packages.debian.org/unstable/net/resolvconf
@@ -67,6 +67,9 @@ install -d %{buildroot}%{_mandir}/man{5,8}
 install -m 644 man/interface-order.5 %{buildroot}%{_mandir}/man5
 install -m 644 man/resolvconf.8 %{buildroot}%{_mandir}/man8
 
+# Coexist with systemd-resolved
+mv %{buildroot}/sbin/resolvconf %{buildroot}/sbin/nm-resolvconf
+
 %post
 %tmpfiles_create %{name}.conf
 %systemd_post %{name}
@@ -86,7 +89,7 @@ fi
 
 %files
 %doc README
-/sbin/%{name}
+/sbin/nm-%{name}
 /lib/%{name}
 %{_prefix}/lib/tmpfiles.d/*.conf
 %{_unitdir}/%{name}.service

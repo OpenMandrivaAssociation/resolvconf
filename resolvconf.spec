@@ -33,7 +33,7 @@ programs that use them.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 %build
 # fix path for run-parts

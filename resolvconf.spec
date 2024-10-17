@@ -4,7 +4,7 @@ Version:	1.75
 Release:	DEAD PACKAGE GOT REPLACED BY SYSTEMD
 License:	GPLv2+
 Group:		Networking/Other
-Url:		http://packages.debian.org/unstable/net/resolvconf
+Url:		https://packages.debian.org/unstable/net/resolvconf
 Source0:	ftp://ftp.debian.org/debian/pool/main/r/resolvconf/%{name}_%{version}.tar.xz
 Source1:	list-by-metric
 Source2:	resolvconf.service
